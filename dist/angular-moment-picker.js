@@ -304,12 +304,13 @@
 							selectable = $scope.limits.isSelectable(year, 'year');
 						
 						if (!$scope.decadeView.fourYears[index]) $scope.decadeView.fourYears[index] = [];
-						$scope.decadeView.fourYears[index].push({
+						var temp = {
 							label: year.format(momentPicker.yearsFormat),
 							year:  year.year(),
-							class: !selectable || [0, 11].indexOf(y) >= 0 ? 'disabled' : year.isSame($scope.valueMoment, 'year') ? 'selected' : '',
 							selectable: selectable
-						});
+						};
+						temp['class'] = !selectable || [0, 11].indexOf(y) >= 0 ? 'disabled' : year.isSame($scope.valueMoment, 'year') ? 'selected' : '';
+						$scope.decadeView.fourYears[index].push(temp);
 						year.add(1, 'years');
 					}
 					// return title
@@ -334,13 +335,14 @@
 							selectable = $scope.limits.isSelectable(month, 'month');
 						
 						if (!$scope.yearView.fourMonths[index]) $scope.yearView.fourMonths[index] = [];
-						$scope.yearView.fourMonths[index].push({
+						var temp = {
 							label: month.format(momentPicker.monthsFormat),
 							year:  month.year(),
 							month: month.month(),
-							class: !selectable ? 'disabled' : month.isSame($scope.valueMoment, 'month') ? 'selected' : '',
 							selectable: selectable
-						});
+						};
+						temp['class'] = !selectable ? 'disabled' : month.isSame($scope.valueMoment, 'month') ? 'selected' : '';
+						$scope.yearView.fourMonths[index].push(temp);
 						month.add(1, 'months');
 					});
 					// return title
@@ -380,12 +382,12 @@
 									year:  day.year(),
 									date:  day.date(),
 									month: day.month(),
-									class: [
-										!!$scope.today && day.isSame(new Date(), 'day') ? 'today' : '',
-										!selectable || day.month() != month ? 'disabled' : day.isSame($scope.valueMoment, 'day') ? 'selected' : ''
-									].join(' ').trim(),
 									selectable: selectable
 								};
+							d['class'] = [
+								!!$scope.today && day.isSame(new Date(), 'day') ? 'today' : '',
+								!selectable || day.month() != month ? 'disabled' : day.isSame($scope.valueMoment, 'day') ? 'selected' : ''
+							].join(' ').trim();
 							day.add(1, 'days');
 							return d;
 						});
@@ -415,15 +417,16 @@
 						
 						if (!$scope.dayView.threeHours[index])
 							$scope.dayView.threeHours[index] = [];
-						$scope.dayView.threeHours[index].push({
+						var temp = {
 							label: hour.format(momentPicker.hoursFormat),
 							year:  hour.year(),
 							month: hour.month(),
 							date:  hour.date(),
 							hour:  hour.hour(),
-							class: !selectable ? 'disabled' : hour.isSame($scope.valueMoment, 'hour') ? 'selected' : '',
 							selectable: selectable
-						});
+						};
+						temp['class'] = !selectable ? 'disabled' : hour.isSame($scope.valueMoment, 'hour') ? 'selected' : '';
+						$scope.dayView.threeHours[index].push(temp);
 						hour.add(1, 'hours');
 					}
 					// return title
@@ -450,16 +453,17 @@
 						
 						if (!$scope.hourView.minutes[index])
 							$scope.hourView.minutes[index] = [];
-						$scope.hourView.minutes[index].push({
+						var temp = {
 							label:  minute.format(minutesFormat),
 							year:   minute.year(),
 							month:  minute.month(),
 							date:   minute.date(),
 							hour:   minute.hour(),
 							minute: minute.minute(),
-							class:  !selectable ? 'disabled' : minute.isSame($scope.valueMoment, 'minute') ? 'selected' : '',
 							selectable: selectable
-						});
+						};
+						temp['class'] = !selectable ? 'disabled' : minute.isSame($scope.valueMoment, 'minute') ? 'selected' : '';
+						$scope.hourView.minutes[index].push(temp);
 						i++;
 						minute.add(momentPicker.minutesStep, 'minutes');
 					}
@@ -486,7 +490,7 @@
 						
 						if (!$scope.minuteView.seconds[index])
 							$scope.minuteView.seconds[index] = [];
-						$scope.minuteView.seconds[index].push({
+						var temp = {
 							label:  second.format(momentPicker.secondsFormat),
 							year:   second.year(),
 							month:  second.month(),
@@ -494,9 +498,10 @@
 							hour:   second.hour(),
 							minute: second.minute(),
 							second: second.second(),
-							class:  !selectable ? 'disabled' : second.isSame($scope.valueMoment, 'second') ? 'selected' : '',
 							selectable: selectable
-						});
+						};
+						temp['class'] = !selectable ? 'disabled' : second.isSame($scope.valueMoment, 'second') ? 'selected' : '';
+						$scope.minuteView.seconds[index].push(temp);
 						i++;
 						second.add(momentPicker.secondsStep, 'seconds');
 					}
