@@ -58,9 +58,10 @@
 		
 		// Directive
 		function MomentPickerDirective(timeout, sce, compile, document, window, momentPickerProvider) {
-			this.restrict = 'A',
+			this.restrict = 'A';
 			this.scope = {
 				model:     '=momentPicker',
+				momentVal: '=?',
 				locale:    '@?',
 				format:    '@?',
 				minView:   '@?',
@@ -547,6 +548,7 @@
 					newValue = $scope.valueMoment.format($scope.format);
 				if (newValue != oldValue)
 					$timeout(function () {
+						$scope.momentVal = $scope.valueMoment.clone();
 						$scope.view.update($scope.view.moment = $scope.valueMoment.clone());
 						$scope.model = newValue;
 						if (angular.isFunction($scope.change))
