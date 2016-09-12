@@ -598,7 +598,7 @@
 			$document.on('click', function () { if ($scope.view.isOpen) $timeout($scope.view.close); });
 			$scope.container.on('click', function (e) { e.stopPropagation(); });
 			$scope.contents.on('click', function (e) {
-				e.stopPropagation();
+				//e.stopPropagation();
 				if (!$scope.view.isOpen) $timeout($scope.view.open);
 			});
 			angular.element($scope.contents[0].querySelector('input')).on('focus', function () { if (!$scope.view.isOpen) $timeout($scope.view.open); });
