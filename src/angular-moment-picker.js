@@ -237,15 +237,17 @@
 				},
 				position: function () {
 					$scope.picker.removeClass('top').removeClass('left');
+					var pYoffset = $window.pageYoffset || document.documentElement.scrollTop,
+						pXoffset = $window.pageXoffset || document.documentElement.scrollLeft;
 					
 					var container = $scope.container[0],
 						offset    = getOffset(container),
-						top       = offset.top - $window.pageYOffset,
-						left      = offset.left - $window.pageXOffset,
-						winWidth  = $window.innerWidth,
-						winHeight = $window.innerHeight;
+						top       = offset.top - pYoffset,
+						left      = offset.left - pXoffset,
+						winWidth  = $window.innerWidth || document.documentElement.clientWidth,
+						winHeight = $window.innerHeight || document.documentElement.clientHeight;
 					
-					if (top + $window.pageYOffset - container.offsetHeight > 0 && top > winHeight / 2) $scope.picker.addClass('top');
+					if (top + pYoffset - container.offsetHeight > 0 && top > winHeight / 2) $scope.picker.addClass('top');
 					if (left + container.offsetWidth > winWidth) $scope.picker.addClass('left');
 				},
 				// utility
